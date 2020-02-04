@@ -1,12 +1,18 @@
 import React from "react";
 import styles from "./login.module.scss";
 
-const Login = () => {
+const Login = ({ login, password, loginFn }) => {
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(e.target);
+    // loginFn(e.name.login);
+  };
+
   return (
     <div className={styles.container}>
       {/* <img src="https://media.graphcms.com/zPewWKLSwumhoskU9dlW" alt="Logo Bramgaz" /> */}
       <h3>Logownie</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Login</label>
         <input
           required

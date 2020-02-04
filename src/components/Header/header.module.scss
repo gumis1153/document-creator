@@ -8,9 +8,20 @@ header {
         width: 1200px;
         height: 100px;
         margin: 0 auto;
+
+        div.timer {
+            width: 110px;
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                color: #ffffff;
+            }
+        }
+
+
     }
 
-    span,
     h2 {
         position: absolute;
         top: 50%;
@@ -30,4 +41,15 @@ header {
         font-weight: 400;
         right: 0;
     }
+}
+
+.time,
+.date {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.date {
+    left: 80px;
 }

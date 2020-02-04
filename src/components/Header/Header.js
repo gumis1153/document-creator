@@ -1,45 +1,66 @@
 import React from "react";
 import styles from "./header.module.scss";
 
-const Header = () => {
-  // const date = new Date();
+class Header extends React.Component {
+  state = {
+    time: "",
+    date: ""
+  };
 
-  // const time = () => {
-  //   const hours =
-  //     date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+  componentDidMount() {
+    const time = () => {
+      const date = new Date();
+      const hours =
+        date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+      const minutes =
+        date.getMinutes() < 10
+          ? `0${date.getMinutes()}`
+          : `${date.getMinutes()}`;
+      const seconds =
+        date.getSeconds() < 10
+          ? `0${date.getSeconds()}`
+          : `${date.getSeconds()}`;
+      const fullTime = `${hours}:${minutes}:${seconds}`;
+      this.setState({
+        time: fullTime
+      });
+    };
 
-  //   const minutes =
-  //     date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+    const day = () => {
+      const date = new Date();
+      const day =
+        date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+      const month =
+        date.getMonth() + 1 < 10
+          ? `0${date.getMonth() + 1}`
+          : `${date.getMonth()}`;
+      const year = date.getFullYear();
+      const fullDay = `${day}.${month}.${year}`;
+      this.setState({
+        date: fullDay
+      });
+    };
 
-  //   const seconds =
-  //     date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`;
+    setInterval(() => {
+      time();
+      day();
+    }, 1000);
+  }
 
-  //   const fullTime = `${hours}:${minutes}:${seconds}`;
-  //   console.log(setInterval(fullTime, 1000));
+  render() {
+    return (
+      <header>
+        <div className={styles.wrapper}>
+          <div className={styles.timer}>
+            <span className={styles.time}>{this.state.time}</span>
+            <span className={styles.date}>{this.state.date}</span>
+          </div>
 
-  //   return fullTime;
-  // };
-
-  // const day = () => {
-  //   const day =
-  //     date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-  //   const month =
-  //     date.getMonth() + 1 < 10
-  //       ? `0${date.getMonth() + 1}`
-  //       : `${date.getMonth()}`;
-  //   const year = date.getFullYear();
-  //   const fullDay = `${day}.${month}.${year}`;
-  //   return fullDay;
-  // };
-
-  return (
-    <header>
-      <div className={styles.wrapper}>
-        <span>Czas: ogarnij funkcje </span>
-        <h2>Kreator dokumentów</h2>
-      </div>
-    </header>
-  );
-};
+          <h2>Kreator dokumentów</h2>
+        </div>
+      </header>
+    );
+  }
+}
 
 export default Header;

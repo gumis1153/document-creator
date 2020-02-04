@@ -1,67 +1,25 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  //   Switch,
-  //   Route,
-  NavLink
-} from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faUser,
-  faIndustry,
-  faBoxOpen,
-  faFileAlt,
-  faCog
-} from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Home.module.scss";
 
 const Home = () => {
   return (
-    <Router>
-      <div className={styles.wrapper}>
-        <aside>
-          <nav>
-            <ul>
-              <li>
-                <NavLink exact to="/" activeClassName={styles.active}>
-                  <FontAwesomeIcon className={styles.ico} icon={faHome} />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/individual" activeClassName={styles.active}>
-                  <FontAwesomeIcon className={styles.ico} icon={faUser} />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/companies" activeClassName={styles.active}>
-                  <FontAwesomeIcon className={styles.ico} icon={faIndustry} />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/products" activeClassName={styles.active}>
-                  <FontAwesomeIcon className={styles.ico} icon={faBoxOpen} />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/documentation" activeClassName={styles.active}>
-                  <FontAwesomeIcon className={styles.ico} icon={faFileAlt} />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/settings" activeClassName={styles.active}>
-                  <FontAwesomeIcon className={styles.ico} icon={faCog} />
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </aside>
-        <section>
-          <h3>Dziś jest piękny dzień.</h3>
-        </section>
+    <section className={styles.wrapper}>
+      <div>
+        <h2>Dziś jest piękny dzień</h2>
+        <h4>Uśmiechnij się :)</h4>
       </div>
-    </Router>
+      <div className={styles.container}>
+        <article>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum,
+            repudiandae fugit quam quod quo optio dolor in consequuntur eveniet
+            ullam hic impedit delectus sequi, sunt amet facere, obcaecati
+            possimus. Et!
+          </p>
+        </article>
+      </div>
+    </section>
   );
 };
 
