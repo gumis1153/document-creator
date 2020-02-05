@@ -1,22 +1,26 @@
 import React from "react";
+import loadingIcon from "../../assets/images/loading.gif";
 
 import styles from "./Home.module.scss";
 
 const Home = () => {
   return (
     <section className={styles.wrapper}>
-      <div>
-        <h2>Dziś jest piękny dzień</h2>
-        <h4>Uśmiechnij się :)</h4>
-      </div>
       <div className={styles.container}>
+        <div>
+          <h2>Dziś jest piękny dzień</h2>
+          <h4>Uśmiechnij się :)</h4>
+        </div>
+        <div className={styles.photoContainer}>
+          <img src="https://source.unsplash.com/1000x509/?beautiful" alt="" />
+        </div>
         <article>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum,
-            repudiandae fugit quam quod quo optio dolor in consequuntur eveniet
-            ullam hic impedit delectus sequi, sunt amet facere, obcaecati
-            possimus. Et!
-          </p>
+          {/* <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+            dolorem id nesciunt earum itaque neque ipsum, sequi dolores unde
+            odit expedita quis vel ab, magnam illo exercitationem quia aperiam?
+            Impedit?
+          </p> */}
         </article>
       </div>
     </section>

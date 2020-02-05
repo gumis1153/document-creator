@@ -2,7 +2,10 @@ import React from "react";
 import styles from "./individual.module.scss";
 
 class Individual extends React.Component {
-  state = {};
+  state = {
+    data: null
+  };
+
   render() {
     return (
       <section className={styles.wrapper}>
@@ -12,6 +15,7 @@ class Individual extends React.Component {
         <div className={styles.container}>
           <div className={styles.filters}>
             <button>Dodaj nowego</button>
+            <button>Usuń</button>
             <select>
               <option value="default">Sortowanie domyślne</option>
               <option value="date-">Data wprowadzenia rosnąca</option>
@@ -31,6 +35,7 @@ class Individual extends React.Component {
               <input type="text" placeholder="Szukaj..." />
             </div>
           </div>
+
           <div className={styles.listTitles}>
             <div>
               <span>Index</span>
@@ -55,121 +60,6 @@ class Individual extends React.Component {
             </div>
           </div>
           <div className={styles.results}>
-            <div className={styles.item}>
-              <div>
-                <span>ic-0001</span>
-              </div>
-              <div>
-                <span>Jan</span>
-              </div>
-              <div>
-                <span>Kowalski</span>
-              </div>
-              <div>
-                <span>Leszno</span>
-              </div>
-              <div>
-                <span>Narutowicza</span>
-              </div>
-              <div>
-                <span>27/2</span>
-              </div>
-              <div>
-                <span>04.02.2020</span>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div>
-                <span>ic-0001</span>
-              </div>
-              <div>
-                <span>Jan</span>
-              </div>
-              <div>
-                <span>Kowalski</span>
-              </div>
-              <div>
-                <span>Leszno</span>
-              </div>
-              <div>
-                <span>Narutowicza</span>
-              </div>
-              <div>
-                <span>27/2</span>
-              </div>
-              <div>
-                <span>04.02.2020</span>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div>
-                <span>ic-0001</span>
-              </div>
-              <div>
-                <span>Jan</span>
-              </div>
-              <div>
-                <span>Kowalski</span>
-              </div>
-              <div>
-                <span>Leszno</span>
-              </div>
-              <div>
-                <span>Narutowicza</span>
-              </div>
-              <div>
-                <span>27/2</span>
-              </div>
-              <div>
-                <span>04.02.2020</span>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div>
-                <span>ic-0001</span>
-              </div>
-              <div>
-                <span>Jan</span>
-              </div>
-              <div>
-                <span>Kowalski</span>
-              </div>
-              <div>
-                <span>Leszno</span>
-              </div>
-              <div>
-                <span>Narutowicza</span>
-              </div>
-              <div>
-                <span>27/2</span>
-              </div>
-              <div>
-                <span>04.02.2020</span>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div>
-                <span>ic-0001</span>
-              </div>
-              <div>
-                <span>Jan</span>
-              </div>
-              <div>
-                <span>Kowalski</span>
-              </div>
-              <div>
-                <span>Leszno</span>
-              </div>
-              <div>
-                <span>Narutowicza</span>
-              </div>
-              <div>
-                <span>27/2</span>
-              </div>
-              <div>
-                <span>04.02.2020</span>
-              </div>
-            </div>
             <div className={styles.item}>
               <div>
                 <span>ic-0001</span>

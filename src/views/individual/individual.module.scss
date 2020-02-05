@@ -1,7 +1,7 @@
 .wrapper {
     display: grid;
     grid-template-rows: 100px 1fr;
-    width: 80%;
+    width: 1000px;
     height: auto;
     min-height: calc(100vh - 100px - 40px);
     margin: 0 auto;
@@ -83,8 +83,6 @@
             font-size: 14px;
             text-align: center;
         }
-
-
     }
 }
 

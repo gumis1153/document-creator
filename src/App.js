@@ -16,7 +16,6 @@ import {
   faFileAlt,
   faCog
 } from "@fortawesome/free-solid-svg-icons";
-import Login from "./components/Login/Login";
 import Home from "./views/home/Home";
 import Individual from "./views/individual/Individual";
 import Companies from "./views/companies/companies";
@@ -26,24 +25,12 @@ import Settings from "./views/settings/settings";
 import Footer from "./components/Footer/Footer";
 
 class App extends React.Component {
-  state = {
-    login: "admin",
-    password: "admin"
-  };
-
-  handleLogin = () => {
-    console.log("Logowanie");
-  };
-
+  state = {};
   render() {
     return (
       <>
         <Header />
-        {/* <Login
-          login={this.state.login}
-          password={this.state.password}
-          loginFn={this.handleLogin}
-        /> */}
+
         <Router>
           <div className={styles.wrapper}>
             <aside>
