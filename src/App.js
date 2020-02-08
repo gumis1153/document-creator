@@ -1,28 +1,23 @@
-import React from "react";
-import styles from "./App.module.scss";
-import Header from "./components/Header/Header";
-import {
-  BrowserRouter as Router,
-  NavLink,
-  Switch,
-  Route
-} from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import styles from './App.module.scss';
+import Header from './components/Header/Header';
+import { BrowserRouter as Router, NavLink, Switch, Route } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
   faUser,
   faIndustry,
   faBoxOpen,
   faFileAlt,
-  faCog
-} from "@fortawesome/free-solid-svg-icons";
-import Home from "./views/home/Home";
-import Individual from "./views/individual/Individual";
-import Companies from "./views/companies/companies";
-import Products from "./views/products/products";
-import Documentation from "./views/documentation/documentation";
-import Settings from "./views/settings/settings";
-import Footer from "./components/Footer/Footer";
+  faCog,
+} from '@fortawesome/free-solid-svg-icons';
+import Home from './views/home/Home';
+import Individual from './views/individual/Individual';
+import Companies from './views/companies/companies';
+import Products from './views/products/products';
+import Documentation from './views/documentation/documentation';
+import Settings from './views/settings/settings';
+import Footer from './components/Footer/Footer';
 
 class App extends React.Component {
   state = {};
@@ -48,29 +43,17 @@ class App extends React.Component {
                   </li>
                   <li>
                     <NavLink to="/companies" activeClassName={styles.active}>
-                      <FontAwesomeIcon
-                        className={styles.ico}
-                        icon={faIndustry}
-                      />
+                      <FontAwesomeIcon className={styles.ico} icon={faIndustry} />
                     </NavLink>
                   </li>
                   <li>
                     <NavLink to="/products" activeClassName={styles.active}>
-                      <FontAwesomeIcon
-                        className={styles.ico}
-                        icon={faBoxOpen}
-                      />
+                      <FontAwesomeIcon className={styles.ico} icon={faBoxOpen} />
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      to="/documentation"
-                      activeClassName={styles.active}
-                    >
-                      <FontAwesomeIcon
-                        className={styles.ico}
-                        icon={faFileAlt}
-                      />
+                    <NavLink to="/documentation" activeClassName={styles.active}>
+                      <FontAwesomeIcon className={styles.ico} icon={faFileAlt} />
                     </NavLink>
                   </li>
                   <li>

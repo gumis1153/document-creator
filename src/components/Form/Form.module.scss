@@ -1,0 +1,33 @@
+form {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+
+  div {
+    margin-top: 20px;
+  }
+
+  .personalInfo,
+  .locationInfo,
+  .additionalInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+
+    span {
+      font-size: 14px;
+    }
+
+    label {
+      margin-top: 10px;
+      color: #777777;
+      font-size: 14px;
+    }
+
+    input {
+      border: 1px solid #777777;
+      height: 26px;
+    }
+  }
+}

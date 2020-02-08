@@ -1,0 +1,100 @@
+{
+  "result": [
+    {
+      "id": "1",
+      "type": "individual",
+      "name": {
+        "first": "Maciej",
+        "last": "Nowak"
+      },
+      "location": {
+        "street": "Dąbrowskiego",
+        "number": "72",
+        "city": "Warszawa",
+        "postcode": "00-001"
+      },
+      "email": "m.dabrowski@poczta.org",
+      "phone": "555-555-555"
+    },
+    {
+      "id": "2",
+      "type": "individual",
+      "name": {
+        "first": "Adam",
+        "last": "Kowalski"
+      },
+      "location": {
+        "street": "Grunwaldzka",
+        "number": "3",
+        "city": "Poznań",
+        "postcode": "87-273"
+      },
+      "email": "a.kowalski@poczta.org",
+      "phone": "585-555-888"
+    },
+    {
+      "id": "3",
+      "type": "individual",
+      "name": {
+        "first": "Oliwia",
+        "last": "Kaczmarek"
+      },
+      "location": {
+        "street": "Rynek",
+        "number": "64",
+        "city": "Poznań",
+        "postcode": "23-401"
+      },
+      "email": "o.kaczmarek@poczta.org",
+      "phone": "525-525-555"
+    },
+    {
+      "id": "4",
+      "type": "individual",
+      "name": {
+        "first": "Piotr",
+        "last": "Tomowiak"
+      },
+      "location": {
+        "street": "Lotnicza",
+        "number": "42/2",
+        "city": "Leszno",
+        "postcode": "64-100"
+      },
+      "email": "p.tomowiak@poczta.org",
+      "phone": "123-456-789"
+    },
+    {
+      "id": "5",
+      "type": "individual",
+      "name": {
+        "first": "Adam",
+        "last": "Kowalski"
+      },
+      "location": {
+        "street": "Grunwaldzka",
+        "number": "3",
+        "city": "Poznań",
+        "postcode": "87-273"
+      },
+      "email": "a.kowalski@poczta.org",
+      "phone": "585-555-888"
+    },
+    {
+      "id": "6",
+      "type": "individual",
+      "name": {
+        "first": "Oliwia",
+        "last": "Kaczmarek"
+      },
+      "location": {
+        "street": "Rynek",
+        "number": "64",
+        "city": "Poznań",
+        "postcode": "23-401"
+      },
+      "email": "o.kaczmarek@poczta.org",
+      "phone": "525-525-555"
+    }
+  ]
+}
