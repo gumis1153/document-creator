@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './individual.module.scss';
 import Modal from '../../components/Modal/Modal';
+import ModalSummary from '../../components/Modal/ModalSummary';
 
 class Individual extends React.Component {
   state = {
@@ -85,7 +86,9 @@ class Individual extends React.Component {
         addData: '04.02.2020',
       },
     ],
+    newClient: {},
     modalAddNewClientOpen: false,
+    modalSummaryClientOpen: false,
   };
 
   componentDidMount() {
@@ -104,13 +107,17 @@ class Individual extends React.Component {
     const id = `ic${this.state.data.length + 1}`;
     const type = 'individual';
 
+    //dodanie do istniejącej bazy
     newClient = { id, type, ...newClient, addData };
-    console.log(newClient);
-    const updatedData = this.state.data;
-    updatedData.push(newClient);
+    // console.log(newClient);
+    // const updatedData = this.state.data;
+    // updatedData.push(newClient);
     this.setState({
-      data: updatedData,
+      newClient,
+      modalAddNewClientOpen: false,
+      modalSummaryClientOpen: true,
     });
+    console.log(this.state.newClient);
   };
 
   handleOpenModalAddClient = () => {
@@ -122,6 +129,7 @@ class Individual extends React.Component {
   handleCloseModalAddClient = () => {
     this.setState({
       modalAddNewClientOpen: false,
+      modalSummaryClientOpen: false,
     });
   };
 
@@ -133,6 +141,12 @@ class Individual extends React.Component {
             closeModalFn={this.handleCloseModalAddClient}
             individualClients={this.state.data}
             dataFromFormThroughModal={this.dataFromFormThroughModal}
+          />
+        )}
+        {this.state.modalSummaryClientOpen && (
+          <ModalSummary
+            closeModalFn={this.handleCloseModalAddClient}
+            newClient={this.state.newClient}
           />
         )}
         <div>
