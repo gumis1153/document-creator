@@ -117,7 +117,16 @@ class Individual extends React.Component {
       modalAddNewClientOpen: false,
       modalSummaryClientOpen: true,
     });
-    console.log(this.state.newClient);
+    // console.log(this.state.newClient);
+  };
+
+  handleAddNewClient = item => {
+    const data = this.state.data;
+    data.push(this.state.newClient);
+    this.setState({
+      data,
+    });
+    this.handleCloseModalAddClient();
   };
 
   handleOpenModalAddClient = () => {
@@ -147,6 +156,7 @@ class Individual extends React.Component {
           <ModalSummary
             closeModalFn={this.handleCloseModalAddClient}
             newClient={this.state.newClient}
+            addNewClientFn={this.handleAddNewClient}
           />
         )}
         <div>

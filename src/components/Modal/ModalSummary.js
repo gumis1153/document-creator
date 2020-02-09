@@ -2,7 +2,7 @@ import React from 'react';
 import BtnClose from '../BtnClose/BtnClose';
 import styles from './Modal.module.scss';
 
-const ModalSummary = ({ closeModalFn, newClient }) => {
+const ModalSummary = ({ closeModalFn, newClient, addNewClientFn }) => {
   return (
     <div className={styles.wrapper}>
       <h2>Klienci indywidualni</h2>
@@ -12,7 +12,7 @@ const ModalSummary = ({ closeModalFn, newClient }) => {
         <div className={styles.newClientData}>
           <div className={styles.indexNames}>
             <span className={styles.small}>Id:</span>
-            <snap className={styles.small}>Data dodania:</snap>{' '}
+            <span className={styles.small}>Data dodania:</span>{' '}
             <span className={styles.small}>Imię:</span>
             <span className={styles.small}>Nazwisko:</span>
             <span className={styles.small}>Nr telefonu:</span>
@@ -38,7 +38,9 @@ const ModalSummary = ({ closeModalFn, newClient }) => {
 
         <div className={styles.summaryOptions}>
           <button className={styles.summaryBtn}>Generuj dokumenty</button>
-          <button className={styles.summaryBtn}>Dodaj i zakończ</button>
+          <button className={styles.summaryBtn} onClick={addNewClientFn}>
+            Dodaj i zakończ
+          </button>
         </div>
       </div>
     </div>
