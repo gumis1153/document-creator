@@ -5,95 +5,10 @@ import ModalSummary from '../../components/Modal/ModalSummary';
 
 class Individual extends React.Component {
   state = {
-    // symulacja api w state
-    data: [
-      {
-        id: 'ic1',
-        type: 'individual',
-        firstName: 'Maciej',
-        lastName: 'Nowak',
-        street: 'Dąbrowskiego',
-        homeNumber: '72',
-        city: 'Warszawa',
-        postcode: '00-001',
-        email: 'm.dabrowski@poczta.org',
-        phone: '555-555-555',
-        addData: '04.02.2020',
-      },
-      {
-        id: 'ic2',
-        type: 'individual',
-        firstName: 'Adam',
-        lastName: 'Kowalski',
-        street: 'Grunwaldzka',
-        homeNumber: '3',
-        city: 'Poznań',
-        postcode: '87-273',
-        email: 'a.kowalski@poczta.org',
-        phone: '585-555-888',
-        addData: '04.02.2020',
-      },
-      {
-        id: 'ic3',
-        type: 'individual',
-        firstName: 'Oliwia',
-        lastName: 'Kaczmarek',
-        street: 'Rynek',
-        homeNumber: '64',
-        city: 'Poznań',
-        postcode: '23-401',
-        email: 'o.kaczmarek@poczta.org',
-        phone: '525-525-555',
-        addData: '04.02.2020',
-      },
-      {
-        id: 'ic4',
-        type: 'individual',
-        firstName: 'Piotr',
-        lastName: 'Tomowiak',
-        street: 'Lotnicza',
-        homeNumber: '42/2',
-        city: 'Leszno',
-        postcode: '64-100',
-        email: 'p.tomowiak@poczta.org',
-        phone: '123-456-789',
-        addData: '04.02.2020',
-      },
-      {
-        id: 'ic5',
-        type: 'individual',
-        firstName: 'Adam',
-        lastName: 'Kowalski',
-        street: 'Grunwaldzka',
-        homeNumber: '3',
-        city: 'Poznań',
-        postcode: '87-273',
-        email: 'a.kowalski@poczta.org',
-        phone: '585-555-888',
-        addData: '04.02.2020',
-      },
-      {
-        id: 'ic6',
-        type: 'individual',
-        firstName: 'Oliwia',
-        lastName: 'Kaczmarek',
-        street: 'Rynek',
-        homeNumber: '64',
-        city: 'Poznań',
-        postcode: '23-401',
-        email: 'o.kaczmarek@poczta.org',
-        phone: '525-525-555',
-        addData: '04.02.2020',
-      },
-    ],
     newClient: {},
     modalAddNewClientOpen: false,
     modalSummaryClientOpen: false,
   };
-
-  componentDidMount() {
-    console.log('działa');
-  }
 
   dataFromFormThroughModal = newClient => {
     const addDate = new Date();
@@ -104,28 +19,22 @@ class Individual extends React.Component {
 
     //pozostałe dane potrzebne do bazy
     const addData = `${day}.${month}.${year}`;
-    const id = `ic${this.state.data.length + 1}`;
+    const id = `ic${this.props.individualClientDB.length + 1}`;
     const type = 'individual';
 
     //dodanie do istniejącej bazy
     newClient = { id, type, ...newClient, addData };
-    // console.log(newClient);
-    // const updatedData = this.state.data;
-    // updatedData.push(newClient);
     this.setState({
       newClient,
       modalAddNewClientOpen: false,
       modalSummaryClientOpen: true,
     });
-    // console.log(this.state.newClient);
   };
 
-  handleAddNewClient = item => {
-    const data = this.state.data;
-    data.push(this.state.newClient);
-    this.setState({
-      data,
-    });
+  handleAddNewClient = () => {
+    //dodanie nowego klienta do 'bazy danych'
+    const individualDB = this.props.individualClientDB;
+    individualDB.push(this.state.newClient);
     this.handleCloseModalAddClient();
   };
 
@@ -141,30 +50,36 @@ class Individual extends React.Component {
       modalSummaryClientOpen: false,
     });
   };
-
   render() {
+    const { modalAddNewClientOpen, modalSummaryClientOpen, newClient } = this.state;
+    const {
+      handleCloseModalAddClient,
+      dataFromFormThroughModal,
+      handleAddNewClient,
+      handleOpenModalAddClient,
+    } = this;
+    const { wrapper, container, filters, listTitles, results } = styles;
     return (
-      <section className={styles.wrapper}>
-        {this.state.modalAddNewClientOpen && (
+      <section className={wrapper}>
+        {modalAddNewClientOpen && (
           <Modal
-            closeModalFn={this.handleCloseModalAddClient}
-            individualClients={this.state.data}
-            dataFromFormThroughModal={this.dataFromFormThroughModal}
+            closeModalFn={handleCloseModalAddClient}
+            dataFromFormThroughModal={dataFromFormThroughModal}
           />
         )}
-        {this.state.modalSummaryClientOpen && (
+        {modalSummaryClientOpen && (
           <ModalSummary
-            closeModalFn={this.handleCloseModalAddClient}
-            newClient={this.state.newClient}
-            addNewClientFn={this.handleAddNewClient}
+            closeModalFn={handleCloseModalAddClient}
+            newClient={newClient}
+            addNewClientFn={handleAddNewClient}
           />
         )}
         <div>
           <h2>Klienci indywidualni</h2>
         </div>
-        <div className={styles.container}>
-          <div className={styles.filters}>
-            <button onClick={this.handleOpenModalAddClient}>Dodaj nowego</button>
+        <div className={container}>
+          <div className={filters}>
+            <button onClick={handleOpenModalAddClient}>Dodaj nowego</button>
             <button>Usuń</button>
             <select>
               <option value="default">Sortowanie domyślne</option>
@@ -186,7 +101,7 @@ class Individual extends React.Component {
             </div>
           </div>
 
-          <div className={styles.listTitles}>
+          <div className={listTitles}>
             <div>
               <span>Index</span>
             </div>
@@ -209,8 +124,8 @@ class Individual extends React.Component {
               <span>Data wprowadzenia</span>
             </div>
           </div>
-          <div className={styles.results}>
-            {this.state.data.map(item => (
+          <div className={results}>
+            {this.props.individualClientDB.map(item => (
               <div key={item.id} className={styles.item} data-id={item.id}>
                 <div>
                   <span>{item.id}</span>

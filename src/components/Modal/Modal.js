@@ -4,7 +4,7 @@ import BtnClose from '../BtnClose/BtnClose';
 import styles from './Modal.module.scss';
 // import { CLIENT_RENEG_LIMIT } from 'tls';
 
-const Modal = ({ closeModalFn, individualClients, dataFromFormThroughModal }) => {
+const Modal = ({ closeModalFn, dataFromFormThroughModal }) => {
   const handleSummary = () => {
     console.log('Podsumowanie');
   };
@@ -18,7 +18,7 @@ const Modal = ({ closeModalFn, individualClients, dataFromFormThroughModal }) =>
       <h2>Klienci indywidualni</h2>
       <h4>Dodawanie nowego</h4>
       <BtnClose closeModalFn={closeModalFn} />
-      <Form individualClients={individualClients} callBackFromForm={formCallBack} />
+      <Form callBackFromForm={formCallBack} />
     </div>
   );
 };
