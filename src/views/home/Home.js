@@ -1,7 +1,7 @@
-import React from "react";
-import loadingIcon from "../../assets/images/loading.gif";
+import React from 'react';
+import loadingIcon from '../../assets/images/loading.gif';
 
-import styles from "./Home.module.scss";
+import styles from './Home.module.scss';
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
           <h4>Uśmiechnij się :)</h4>
         </div>
         <div className={styles.photoContainer}>
-          <img src="https://source.unsplash.com/1000x509/?beautiful" alt="" />
+          <img src="https://source.unsplash.com/1000x509/?landscapes" alt="" />
         </div>
         <article>
           {/* <p>

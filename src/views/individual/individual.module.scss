@@ -88,11 +88,14 @@
   display: grid;
   grid-template-columns: 50px 1fr 1fr 1fr 1fr 100px 150px;
   cursor: pointer;
+  z-index: 1;
 
   div {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 0;
+    pointer-events: none;
 
     span {
       font-size: 14px;

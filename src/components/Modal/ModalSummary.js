@@ -2,7 +2,7 @@ import React from 'react';
 import BtnClose from '../BtnClose/BtnClose';
 import styles from './Modal.module.scss';
 
-const ModalSummary = ({ closeModalFn, newClient, addNewClientFn }) => {
+const ModalSummary = ({ closeModalFn, newClient, addNewClientFn, modalClientInfoOpen }) => {
   const {
     wrapper,
     summary,
@@ -59,9 +59,11 @@ const ModalSummary = ({ closeModalFn, newClient, addNewClientFn }) => {
 
         <div className={summaryOptions}>
           <button className={summaryBtn}>Generuj dokumenty</button>
-          <button className={summaryBtn} onClick={addNewClientFn}>
-            Dodaj i zakończ
-          </button>
+          {!modalClientInfoOpen ? (
+            <button className={summaryBtn} onClick={addNewClientFn}>
+              Dodaj i zakończ
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

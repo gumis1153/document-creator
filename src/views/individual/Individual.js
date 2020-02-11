@@ -8,6 +8,7 @@ class Individual extends React.Component {
     newClient: {},
     modalAddNewClientOpen: false,
     modalSummaryClientOpen: false,
+    modalClientInfoOpen: false,
   };
 
   dataFromFormThroughModal = newClient => {
@@ -46,8 +47,21 @@ class Individual extends React.Component {
 
   handleCloseModalAddClient = () => {
     this.setState({
+      newClient: {},
       modalAddNewClientOpen: false,
       modalSummaryClientOpen: false,
+      modalClientInfoOpen: false,
+    });
+  };
+
+  //otwieranie info o kliencie
+  handleShowClientInfo = e => {
+    let index = e.target.getAttribute('data-id');
+    const newClient = this.props.individualClientDB.find(obj => obj.id === index);
+    this.setState({
+      newClient,
+      modalSummaryClientOpen: true,
+      modalClientInfoOpen: true,
     });
   };
   render() {
@@ -72,6 +86,7 @@ class Individual extends React.Component {
             closeModalFn={handleCloseModalAddClient}
             newClient={newClient}
             addNewClientFn={handleAddNewClient}
+            modalClientInfoOpen={this.state.modalClientInfoOpen}
           />
         )}
         <div>
@@ -125,28 +140,34 @@ class Individual extends React.Component {
             </div>
           </div>
           <div className={results}>
-            {this.props.individualClientDB.map(item => (
-              <div key={item.id} className={styles.item} data-id={item.id}>
+            {this.props.individualClientDB.map((element, index) => (
+              <div
+                key={index}
+                className={styles.item}
+                data-id={element.id}
+                onClick={this.handleShowClientInfo}
+                data-id={element.id}
+              >
                 <div>
-                  <span>{item.id}</span>
+                  <span>{element.id}</span>
                 </div>
                 <div>
-                  <span>{item.firstName}</span>
+                  <span>{element.firstName}</span>
                 </div>
                 <div>
-                  <span>{item.lastName}</span>
+                  <span>{element.lastName}</span>
                 </div>
                 <div>
-                  <span>{item.city}</span>
+                  <span>{element.city}</span>
                 </div>
                 <div>
-                  <span>{item.street}</span>
+                  <span>{element.street}</span>
                 </div>
                 <div>
-                  <span>{item.homeNumber}</span>
+                  <span>{element.homeNumber}</span>
                 </div>
                 <div>
-                  <span>{item.addData}</span>
+                  <span>{element.addData}</span>
                 </div>
               </div>
             ))}
