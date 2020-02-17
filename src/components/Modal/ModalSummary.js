@@ -46,7 +46,7 @@ const ModalSummary = ({
       ) : null}
       <h2>Klienci indywidualni</h2>
       <h4>Dodawanie nowego - podsumowanie</h4>
-      <BtnClose closeModalFn={closeModalFn} />
+      {modalClientInfoOpen ? <BtnClose closeModalFn={closeModalFn} /> : null}
       <div className={summary}>
         <div className={newClientData}>
           <div className={indexNames}>
@@ -75,6 +75,8 @@ const ModalSummary = ({
         </div>
 
         <div className={summaryOptions}>
+          {' '}
+          {!modalClientInfoOpen ? <button onClick={closeModalFn}>Anuluj</button> : null}
           <button className={summaryBtn}>Generuj dokumenty</button>
           {!modalClientInfoOpen ? (
             <button className={summaryBtn} onClick={addNewClientFn}>

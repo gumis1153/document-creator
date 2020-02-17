@@ -5,12 +5,20 @@ import ModalSummary from '../../components/Modal/ModalSummary';
 
 class Individual extends React.Component {
   state = {
+    clientDB: [],
     newClient: {},
     modalAddNewClientOpen: false,
     modalSummaryClientOpen: false,
     modalClientInfoOpen: false,
     modalFinalAcceptOpen: false,
+    searchElement: 'firstName',
   };
+
+  componentDidMount() {
+    this.setState({
+      clientDB: this.props.individualClientDB,
+    });
+  }
 
   dataFromFormThroughModal = newClient => {
     const addDate = new Date();
@@ -21,7 +29,7 @@ class Individual extends React.Component {
 
     //pozostałe dane potrzebne do bazy
     const addData = `${day}.${month}.${year}`;
-    const id = `ic${this.props.individualClientDB.length + 1}`;
+    const id = `ic${this.state.clientDB.length + 1}`;
     const type = 'individual';
 
     //dodanie do istniejącej bazy
@@ -35,7 +43,7 @@ class Individual extends React.Component {
 
   handleAddNewClient = () => {
     //dodanie nowego klienta do 'bazy danych'
-    const individualDB = this.props.individualClientDB;
+    const individualDB = this.state.clientDB;
     individualDB.push(this.state.newClient);
     this.handleCloseModalAddClient();
   };
@@ -59,7 +67,7 @@ class Individual extends React.Component {
   //otwieranie info o kliencie
   handleShowClientInfo = e => {
     let index = e.target.getAttribute('data-id');
-    const newClient = this.props.individualClientDB.find(obj => obj.id === index);
+    const newClient = this.state.clientDB.find(obj => obj.id === index);
     this.setState({
       newClient,
       modalSummaryClientOpen: true,
@@ -80,18 +88,74 @@ class Individual extends React.Component {
   };
 
   removeClient = () => {
-    console.log('usunięcie');
     const idOfRemovedElement = this.state.newClient.id.slice(2) - 1;
-    console.log(idOfRemovedElement);
-    console.log(this.props.individualClientDB.splice(idOfRemovedElement, 1));
+    this.state.clientDB.splice(idOfRemovedElement, 1);
     //nadaje nowe id klientom w bazie
     let newId = 1;
-    this.props.individualClientDB.forEach(item => {
+    this.state.clientDB.forEach(item => {
       item.id = `ic${newId++}`;
     });
     this.handleCloseModalAddClient();
   };
 
+  //sortowanie;
+  handleSort = e => {
+    const { clientDB } = this.state;
+    const { value } = e.target;
+
+    switch (value) {
+      case 'default':
+        this.setState({
+          clientDB: clientDB.sort((a, b) => {
+            return a.id - b.id;
+          }),
+        });
+        break;
+      case 'dateAscending':
+        this.setState({
+          clientDB: clientDB.sort((a, b) => {
+            return a.addData > b.addData ? 1 : -1;
+          }),
+        });
+        break;
+      case 'dateDescending':
+        this.setState({
+          clientDB: clientDB.sort((a, b) => {
+            return a.addData < b.addData ? 1 : -1;
+          }),
+        });
+        break;
+      case 'surnameAscending':
+        this.setState({
+          clientDB: clientDB.sort((a, b) => {
+            return a.lastName > b.lastName ? 1 : -1;
+          }),
+        });
+        break;
+      case 'surnameDescending':
+        this.setState({
+          clientDB: clientDB.sort((a, b) => {
+            return a.lastName < b.lastName ? 1 : -1;
+          }),
+        });
+        break;
+    }
+  };
+
+  handleChangeSearchElement = e => {
+    this.setState({
+      searchElement: e.target.value,
+    });
+  };
+
+  // handleSearch = e => {
+  // let searchElement = this.state.searchElement;
+  // const getClient = this.state.clientDB.findIndex(
+  // client => client.searchElement === `${e.target.value}`,
+  // );
+  // this.state.clientDB.find();
+  // console.log(getClient);
+  // };
   render() {
     const { modalAddNewClientOpen, modalSummaryClientOpen, newClient } = this.state;
     const {
@@ -99,18 +163,15 @@ class Individual extends React.Component {
       dataFromFormThroughModal,
       handleAddNewClient,
       handleOpenModalAddClient,
-      removeClientFn,
+      openFinalAcceptModal,
+      closeFinalAcceptModal,
+      handleCloseFinalAccept,
+      removeClient,
+      handleSort,
+      handleChangeSearchElement,
+      handleSearch,
     } = this;
-    const {
-      wrapper,
-      container,
-      filters,
-      listTitles,
-      results,
-      item,
-      checkboxContainer,
-      itemContainer,
-    } = styles;
+    const { wrapper, container, filters, listTitles, results, item } = styles;
     return (
       <section className={wrapper}>
         {modalAddNewClientOpen && (
@@ -125,11 +186,11 @@ class Individual extends React.Component {
             newClient={newClient}
             addNewClientFn={handleAddNewClient}
             modalClientInfoOpen={this.state.modalClientInfoOpen}
-            openFinalAcceptModalFn={this.openFinalAcceptModal}
-            closeFinalAcceptModalFn={this.closeFinalAcceptModal}
+            openFinalAcceptModalFn={openFinalAcceptModal}
+            closeFinalAcceptModalFn={closeFinalAcceptModal}
             modalFinalAcceptOpen={this.state.modalFinalAcceptOpen}
-            modalFinalAcceptClose={this.handleCloseFinalAccept}
-            removeClient={this.removeClient}
+            modalFinalAcceptClose={handleCloseFinalAccept}
+            removeClient={removeClient}
           />
         )}
         <div>
@@ -138,30 +199,28 @@ class Individual extends React.Component {
         <div className={container}>
           <div className={filters}>
             <button onClick={handleOpenModalAddClient}>Dodaj nowego</button>
-            <button>Usuń</button>
-            <select>
+            <select onChange={handleSort}>
               <option value="default">Sortowanie domyślne</option>
-              <option value="date-">Data wprowadzenia rosnąca</option>
-              <option value="date-">Data wprowadzenia malejąca</option>
-              <option value="surname-">Nazwisko - rosnąco</option>
-              <option value="surname-">Nazwisko - malejąco</option>
-              <option value="street-">Ulica - rosnąco</option>
-              <option value="street-">Ulica - malejąco</option>
+              <option value="dateAscending">Data wprowadzenia - rosnąca</option>
+              <option value="dateDescending">Data wprowadzenia - malejąca</option>
+              <option value="surnameAscending">Nazwisko - rosnąco</option>
+              <option value="surnameDescending">Nazwisko - malejąco</option>
             </select>
             <div>
               <span>Szukaj po:</span>
-              <select name="search" id="">
-                <option value="name-surname">Imię i nazwisko</option>
+              <select onChange={handleChangeSearchElement}>
+                <option value="firstName">Imię</option>
+                <option value="lastName">Nazwisko</option>
                 <option value="city">Miasto</option>
                 <option value="street">Ulica</option>
               </select>
-              <input type="text" placeholder="Szukaj..." />
+              <input type="text" placeholder="Szukaj..." onChange={handleSearch} />
             </div>
           </div>
 
           <div className={listTitles}>
             <div>
-              <span>Index</span>
+              <span>Id</span>
             </div>
             <div>
               <span>Imię</span>
@@ -183,7 +242,7 @@ class Individual extends React.Component {
             </div>
           </div>
           <div className={results}>
-            {this.props.individualClientDB.map((element, index) => (
+            {this.state.clientDB.map((element, index) => (
               <div
                 key={index}
                 className={item}
