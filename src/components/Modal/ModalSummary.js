@@ -1,8 +1,18 @@
 import React from 'react';
 import BtnClose from '../BtnClose/BtnClose';
+import ModalFinalAccept from './ModalFinalAccept';
 import styles from './Modal.module.scss';
 
-const ModalSummary = ({ closeModalFn, newClient, addNewClientFn, modalClientInfoOpen }) => {
+const ModalSummary = ({
+  closeModalFn,
+  newClient,
+  addNewClientFn,
+  modalClientInfoOpen,
+  removeClient,
+  modalFinalAcceptOpen,
+  openFinalAcceptModalFn,
+  closeFinalAcceptModalFn,
+}) => {
   const {
     wrapper,
     summary,
@@ -27,6 +37,13 @@ const ModalSummary = ({ closeModalFn, newClient, addNewClientFn, modalClientInfo
   } = newClient;
   return (
     <div className={wrapper}>
+      {/* {console.log(modalFinalAcceptOpen)} */}
+      {modalFinalAcceptOpen ? (
+        <ModalFinalAccept
+          closeFinalAcceptModalFn={closeFinalAcceptModalFn}
+          removeClientFn={removeClient}
+        />
+      ) : null}
       <h2>Klienci indywidualni</h2>
       <h4>Dodawanie nowego - podsumowanie</h4>
       <BtnClose closeModalFn={closeModalFn} />
@@ -62,6 +79,11 @@ const ModalSummary = ({ closeModalFn, newClient, addNewClientFn, modalClientInfo
           {!modalClientInfoOpen ? (
             <button className={summaryBtn} onClick={addNewClientFn}>
               Dodaj i zakończ
+            </button>
+          ) : null}
+          {modalClientInfoOpen ? (
+            <button className={summaryBtn} onClick={openFinalAcceptModalFn}>
+              Usuń użytkownika
             </button>
           ) : null}
         </div>

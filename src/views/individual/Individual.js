@@ -9,6 +9,7 @@ class Individual extends React.Component {
     modalAddNewClientOpen: false,
     modalSummaryClientOpen: false,
     modalClientInfoOpen: false,
+    modalFinalAcceptOpen: false,
   };
 
   dataFromFormThroughModal = newClient => {
@@ -51,6 +52,7 @@ class Individual extends React.Component {
       modalAddNewClientOpen: false,
       modalSummaryClientOpen: false,
       modalClientInfoOpen: false,
+      modalFinalAcceptOpen: false,
     });
   };
 
@@ -64,6 +66,32 @@ class Individual extends React.Component {
       modalClientInfoOpen: true,
     });
   };
+
+  closeFinalAcceptModal = () => {
+    this.setState({
+      modalFinalAcceptOpen: false,
+    });
+  };
+
+  openFinalAcceptModal = () => {
+    this.setState({
+      modalFinalAcceptOpen: true,
+    });
+  };
+
+  removeClient = () => {
+    console.log('usunięcie');
+    const idOfRemovedElement = this.state.newClient.id.slice(2) - 1;
+    console.log(idOfRemovedElement);
+    console.log(this.props.individualClientDB.splice(idOfRemovedElement, 1));
+    //nadaje nowe id klientom w bazie
+    let newId = 1;
+    this.props.individualClientDB.forEach(item => {
+      item.id = `ic${newId++}`;
+    });
+    this.handleCloseModalAddClient();
+  };
+
   render() {
     const { modalAddNewClientOpen, modalSummaryClientOpen, newClient } = this.state;
     const {
@@ -71,8 +99,18 @@ class Individual extends React.Component {
       dataFromFormThroughModal,
       handleAddNewClient,
       handleOpenModalAddClient,
+      removeClientFn,
     } = this;
-    const { wrapper, container, filters, listTitles, results } = styles;
+    const {
+      wrapper,
+      container,
+      filters,
+      listTitles,
+      results,
+      item,
+      checkboxContainer,
+      itemContainer,
+    } = styles;
     return (
       <section className={wrapper}>
         {modalAddNewClientOpen && (
@@ -87,6 +125,11 @@ class Individual extends React.Component {
             newClient={newClient}
             addNewClientFn={handleAddNewClient}
             modalClientInfoOpen={this.state.modalClientInfoOpen}
+            openFinalAcceptModalFn={this.openFinalAcceptModal}
+            closeFinalAcceptModalFn={this.closeFinalAcceptModal}
+            modalFinalAcceptOpen={this.state.modalFinalAcceptOpen}
+            modalFinalAcceptClose={this.handleCloseFinalAccept}
+            removeClient={this.removeClient}
           />
         )}
         <div>
@@ -143,8 +186,8 @@ class Individual extends React.Component {
             {this.props.individualClientDB.map((element, index) => (
               <div
                 key={index}
-                className={styles.item}
-                data-id={element.id}
+                className={item}
+                key={index}
                 onClick={this.handleShowClientInfo}
                 data-id={element.id}
               >
