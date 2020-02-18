@@ -3,6 +3,14 @@ import styles from './individual.module.scss';
 import Modal from '../../components/Modal/Modal';
 import ModalSummary from '../../components/Modal/ModalSummary';
 
+const sort = {
+  default: (a, b) => a.id - b.id,
+  dateAscending: (a, b) => (a.addData > b.addData ? 1 : -1),
+  dateDescending: (a, b) => (a.addData < b.addData ? 1 : -1),
+  surnameAscending: (a, b) => (a.lastName > b.lastName ? 1 : -1),
+  surnameDescending: (a, b) => (a.lastName < b.lastName ? 1 : -1),
+};
+
 class Individual extends React.Component {
   state = {
     clientDB: [],
@@ -29,7 +37,7 @@ class Individual extends React.Component {
 
     //pozostałe dane potrzebne do bazy
     const addData = `${day}.${month}.${year}`;
-    const id = `ic${this.state.clientDB.length + 1}`;
+    const id = `${this.state.clientDB.length + 1}`;
     const type = 'individual';
 
     //dodanie do istniejącej bazy
@@ -66,8 +74,12 @@ class Individual extends React.Component {
 
   //otwieranie info o kliencie
   handleShowClientInfo = e => {
+    // debugger;
+    console.log(this.state.newClient);
     let index = e.target.getAttribute('data-id');
+    console.log(index);
     const newClient = this.state.clientDB.find(obj => obj.id === index);
+    console.log(newClient);
     this.setState({
       newClient,
       modalSummaryClientOpen: true,
@@ -88,12 +100,14 @@ class Individual extends React.Component {
   };
 
   removeClient = () => {
-    const idOfRemovedElement = this.state.newClient.id.slice(2) - 1;
+    // debugger;
+    const idOfRemovedElement = this.state.newClient.id - 1;
     this.state.clientDB.splice(idOfRemovedElement, 1);
     //nadaje nowe id klientom w bazie
+    // id musi być stringiem
     let newId = 1;
     this.state.clientDB.forEach(item => {
-      item.id = `ic${newId++}`;
+      item.id = `${newId++}`;
     });
     this.handleCloseModalAddClient();
   };
@@ -102,44 +116,9 @@ class Individual extends React.Component {
   handleSort = e => {
     const { clientDB } = this.state;
     const { value } = e.target;
-
-    switch (value) {
-      case 'default':
-        this.setState({
-          clientDB: clientDB.sort((a, b) => {
-            return a.id - b.id;
-          }),
-        });
-        break;
-      case 'dateAscending':
-        this.setState({
-          clientDB: clientDB.sort((a, b) => {
-            return a.addData > b.addData ? 1 : -1;
-          }),
-        });
-        break;
-      case 'dateDescending':
-        this.setState({
-          clientDB: clientDB.sort((a, b) => {
-            return a.addData < b.addData ? 1 : -1;
-          }),
-        });
-        break;
-      case 'surnameAscending':
-        this.setState({
-          clientDB: clientDB.sort((a, b) => {
-            return a.lastName > b.lastName ? 1 : -1;
-          }),
-        });
-        break;
-      case 'surnameDescending':
-        this.setState({
-          clientDB: clientDB.sort((a, b) => {
-            return a.lastName < b.lastName ? 1 : -1;
-          }),
-        });
-        break;
-    }
+    this.setState({
+      clientDB: clientDB.sort(sort[value]),
+    });
   };
 
   handleChangeSearchElement = e => {

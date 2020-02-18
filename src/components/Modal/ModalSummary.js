@@ -23,21 +23,20 @@ const ModalSummary = ({
     summaryOptions,
     summaryBtn,
   } = styles;
-  const {
-    id,
-    addData,
-    firstName,
-    lastName,
-    phone,
-    email,
-    city,
-    postcode,
-    street,
-    homeNumber,
-  } = newClient;
+  // const {
+  //   id,
+  //   addData,
+  //   firstName,
+  //   lastName,
+  //   phone,
+  //   email,
+  //   city,
+  //   postcode,
+  //   street,
+  //   homeNumber,
+  // } = newClient;
   return (
     <div className={wrapper}>
-      {/* {console.log(modalFinalAcceptOpen)} */}
       {modalFinalAcceptOpen ? (
         <ModalFinalAccept
           closeFinalAcceptModalFn={closeFinalAcceptModalFn}
@@ -61,16 +60,16 @@ const ModalSummary = ({
             <span className={small}>Nr domu:</span>
           </div>
           <div className={newClientDataInfo}>
-            <span>{id}</span>
-            <span>{addData}</span>
-            <span>{firstName}</span>
-            <span>{lastName}</span>
-            <span>{phone}</span>
-            <span>{email}</span>
-            <span>{city}</span>
-            <span>{postcode}</span>
-            <span>{street}</span>
-            <span>{homeNumber}</span>
+            <span>{newClient.id}</span>
+            <span>{newClient.addData}</span>
+            <span>{newClient.firstName}</span>
+            <span>{newClient.lastName}</span>
+            <span>{newClient.phone}</span>
+            <span>{newClient.email}</span>
+            <span>{newClient.city}</span>
+            <span>{newClient.postcode}</span>
+            <span>{newClient.street}</span>
+            <span>{newClient.homeNumber}</span>
           </div>
         </div>
 
