@@ -103,7 +103,7 @@ class Individual extends React.Component {
     // debugger;
     const idOfRemovedElement = this.state.newClient.id - 1;
     this.state.clientDB.splice(idOfRemovedElement, 1);
-    //nadaje nowe id klientom w bazie
+    // nadaje nowe id klientom w bazie
     // id musi być stringiem
     let newId = 1;
     this.state.clientDB.forEach(item => {

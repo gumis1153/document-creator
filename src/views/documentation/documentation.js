@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./documentation.module.scss";
+import React from 'react';
+import styles from './documentation.module.scss';
 
 class Documentation extends React.Component {
   state = {};
