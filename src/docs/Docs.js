@@ -2,7 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PersonalDataDocs from '../docs/PersonalDataDocs';
 import Contract from '../docs/Contract';
-import { PDFViewer, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import fontSrc from '../fonts/Montserrat-Regular.ttf';
+import fontSrcBold from '../fonts/Montserrat-Bold.ttf';
+
+Font.register({
+  family: 'Montserrat',
+  fonts: [
+    { src: fontSrc }, // font-style: normal, font-weight: normal
+    { src: fontSrcBold, fontStyle: 'bold', fontWeight: 700 },
+  ],
+});
 
 // Create styles
 const styles = StyleSheet.create({
@@ -59,8 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     fontSize: 11,
     margin: '15 15 0 15',
-    // margin: '10 5 0 5',
-    // padding: '5 10 0 10',
   },
 
   textHeader: {
@@ -86,7 +94,12 @@ const styles = StyleSheet.create({
 
   signText: {
     fontSize: 8,
+    lineHeight: '2pt',
   },
+
+  // contractText: {
+  //   fontSize: 8,
+  // },
 });
 
 const AppDocs = () => (

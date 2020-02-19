@@ -1,25 +1,11 @@
 import React from 'react';
 import { Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
-import fontSrc from '../fonts/Montserrat-Regular.ttf';
-import fontSrcBold from '../fonts/Montserrat-Bold.ttf';
 import checkbox from '../assets/images/checkbox.png';
-
-Font.register({
-  family: 'Montserrat',
-  fonts: [
-    { src: fontSrc }, // font-style: normal, font-weight: normal
-    { src: fontSrcBold, fontStyle: 'bold', fontWeight: 700 },
-  ],
-});
+import DocsHeader from '../docs/DocsHeader';
 
 const PersonalDataDoc = ({ styles }) => {
   const {
     body,
-    sectionHeader,
-    info,
-    infoBig,
-    section,
-    logo,
     content,
     sectionText,
     textHeader,
@@ -32,19 +18,7 @@ const PersonalDataDoc = ({ styles }) => {
   } = styles;
   return (
     <Page size="A4" style={body}>
-      <View style={sectionHeader}>
-        <View style={info}>
-          <Text>00-000 Leszno</Text>
-          <Text>ul. Ulicowa 0/2</Text>
-          <Text>REGIO: 098765432</Text>
-          <Text>NIP: 000-000-00-00</Text>
-          <Text style={infoBig}>tel./fax. 12 345 67 89</Text>
-          <Text style={infoBig}>Mail: biuro@biuro.pl</Text>
-        </View>
-        <View style={section}>
-          <Text style={logo}>FajnaFirma</Text>
-        </View>
-      </View>
+      <DocsHeader styles={styles} />
       <View style={content}>
         <View style={sectionText}>
           <Text style={textHeader}>Zgoda na przetwarzanie danych osobowych</Text>
@@ -71,7 +45,7 @@ const PersonalDataDoc = ({ styles }) => {
         </View>
         <View style={sectionText}>
           <Text style={conditions}>
-            <Image src={checkbox} /> wykonania ciążących na firmie BRAMGAZ obowiązków prawnych np.
+            <Image src={checkbox} /> wykonania ciążących na firmie FIRMA obowiązków prawnych np.
             przyszłe postępowanie uprawnionych organów (podstawa prawna art. 6 ust. 1 c RODO),
           </Text>
         </View>
