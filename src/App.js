@@ -17,6 +17,7 @@ import Companies from './views/companies/companies';
 import Products from './views/products/products';
 import Documentation from './views/documentation/documentation';
 import Settings from './views/settings/settings';
+import AppDocs from './docs/Docs';
 import Footer from './components/Footer/Footer';
 
 class App extends React.Component {
@@ -395,6 +396,7 @@ class App extends React.Component {
               <Route exact path="/products" component={Products} />
               <Route exact path="/documentation" component={Documentation} />
               <Route exact path="/settings" component={Settings} />
+              <Route exact path="/personal-data-docs" component={AppDocs} />
             </Switch>
             <Footer />
           </div>
