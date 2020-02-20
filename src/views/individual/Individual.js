@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './individual.module.scss';
 import Modal from '../../components/Modal/Modal';
 import ModalSummary from '../../components/Modal/ModalSummary';
+import ModalGeneratedDocs from '../../components/Modal/ModalGeneratedDocs';
 
 const sort = {
   default: (a, b) => a.id - b.id,
@@ -19,6 +20,8 @@ class Individual extends React.Component {
     modalSummaryClientOpen: false,
     modalClientInfoOpen: false,
     modalFinalAcceptOpen: false,
+    modalGeneratedDocs: false,
+    isDocsGenerated: false,
     searchElement: 'firstName',
   };
 
@@ -26,6 +29,17 @@ class Individual extends React.Component {
     this.setState({
       clientDB: this.props.individualClientDB,
     });
+  }
+
+  componentDidUpdate() {
+    const individualWrapper = document.querySelector('.individual_wrapper__4a1fw');
+    if (this.state.modalGeneratedDocs) {
+      individualWrapper.style.width = '100%';
+      individualWrapper.style.padding = '0';
+    } else {
+      individualWrapper.style.width = '900px';
+      individualWrapper.style.padding = '0 20px';
+    }
   }
 
   dataFromFormThroughModal = newClient => {
@@ -69,6 +83,20 @@ class Individual extends React.Component {
       modalSummaryClientOpen: false,
       modalClientInfoOpen: false,
       modalFinalAcceptOpen: false,
+      isDocsGenerated: false,
+    });
+  };
+
+  handleCloseGeneratedDocsModal = () => {
+    this.setState({
+      modalGeneratedDocs: false,
+    });
+  };
+
+  handleOpenGeneratedDocsModal = () => {
+    this.setState({
+      modalGeneratedDocs: true,
+      isDocsGenerated: true,
     });
   };
 
@@ -77,6 +105,7 @@ class Individual extends React.Component {
     // debugger;
     console.log(this.state.newClient);
     let index = e.target.getAttribute('data-id');
+    this.props.updateClientIdFn(index);
     console.log(index);
     const newClient = this.state.clientDB.find(obj => obj.id === index);
     console.log(newClient);
@@ -85,6 +114,19 @@ class Individual extends React.Component {
       modalSummaryClientOpen: true,
       modalClientInfoOpen: true,
     });
+    // clientId = this.state.newClient
+
+    // this.props.clientId = this.state.newClient.id;
+  };
+
+  isDocsGeneratedFn = () => {
+    this.setState({
+      isDocsGenerated: true,
+    });
+  };
+
+  clientId = () => {
+    let clientId = this.props.clientId;
   };
 
   closeFinalAcceptModal = () => {
@@ -127,6 +169,16 @@ class Individual extends React.Component {
     });
   };
 
+  transferDataToDocs = () => {
+    this.setState({
+      modalGeneratedDocs: true,
+    });
+    // let dataToDocs = this.props.dataToDocs;
+    // dataToDocs = this.state.newClient;
+    // console.log
+    // console.log(dataToDocs);
+    // this.state.newClient;
+  };
   // handleSearch = e => {
   // let searchElement = this.state.searchElement;
   // const getClient = this.state.clientDB.findIndex(
@@ -136,7 +188,13 @@ class Individual extends React.Component {
   // console.log(getClient);
   // };
   render() {
-    const { modalAddNewClientOpen, modalSummaryClientOpen, newClient } = this.state;
+    const {
+      modalAddNewClientOpen,
+      modalSummaryClientOpen,
+      newClient,
+      modalGeneratedDocs,
+      isDocsGenerated,
+    } = this.state;
     const {
       handleCloseModalAddClient,
       dataFromFormThroughModal,
@@ -149,6 +207,9 @@ class Individual extends React.Component {
       handleSort,
       handleChangeSearchElement,
       handleSearch,
+      handleCloseGeneratedDocsModal,
+      handleOpenGeneratedDocsModal,
+      isDocsGeneratedFn,
     } = this;
     const { wrapper, container, filters, listTitles, results, item } = styles;
     return (
@@ -170,6 +231,15 @@ class Individual extends React.Component {
             modalFinalAcceptOpen={this.state.modalFinalAcceptOpen}
             modalFinalAcceptClose={handleCloseFinalAccept}
             removeClient={removeClient}
+            handleOpenGeneratedDocsModal={handleOpenGeneratedDocsModal}
+            isDocsGenerated={isDocsGenerated}
+            isDocsGeneratedFn={isDocsGeneratedFn}
+          />
+        )}
+        {modalGeneratedDocs && (
+          <ModalGeneratedDocs
+            closeGeneratedDocsModalFn={handleCloseGeneratedDocsModal}
+            client={newClient}
           />
         )}
         <div>

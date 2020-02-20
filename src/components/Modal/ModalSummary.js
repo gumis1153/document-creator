@@ -12,6 +12,8 @@ const ModalSummary = ({
   modalFinalAcceptOpen,
   openFinalAcceptModalFn,
   closeFinalAcceptModalFn,
+  handleOpenGeneratedDocsModal,
+  isDocsGenerated,
 }) => {
   const {
     wrapper,
@@ -35,11 +37,6 @@ const ModalSummary = ({
     street,
     homeNumber,
   } = newClient;
-
-  const handleGenerateDocs = () => {
-    console.log('generowanie dokumentów');
-    window.open('/personal-data-docs');
-  };
 
   return (
     <div className={wrapper}>
@@ -81,12 +78,12 @@ const ModalSummary = ({
 
         <div className={summaryOptions}>
           {' '}
-          {!modalClientInfoOpen ? (
+          {!isDocsGenerated ? (
             <button className={summaryBtn} onClick={closeModalFn}>
               Anuluj
             </button>
           ) : null}
-          <button className={summaryBtn} onClick={handleGenerateDocs}>
+          <button className={summaryBtn} onClick={handleOpenGeneratedDocsModal}>
             Generuj dokumenty
           </button>
           {!modalClientInfoOpen ? (

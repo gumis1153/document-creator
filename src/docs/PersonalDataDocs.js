@@ -3,7 +3,10 @@ import { Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
 import checkbox from '../assets/images/checkbox.png';
 import DocsHeader from '../docs/DocsHeader';
 
-const PersonalDataDoc = ({ styles }) => {
+const PersonalDataDoc = ({ styles, client }) => {
+  console.log();
+  console.log();
+  console.log(client.homeNumber);
   const {
     body,
     content,
@@ -24,10 +27,13 @@ const PersonalDataDoc = ({ styles }) => {
           <Text style={textHeader}>Zgoda na przetwarzanie danych osobowych</Text>
         </View>
         <View style={sectionText}>
-          <Text style={clientData}>Imię i nazwisko:</Text>
-          <Text style={clientData}>Miejscowość:</Text>
-          <Text style={clientData}>Ulica:</Text>
-          <Text style={clientData}>Telefon:</Text>
+          <Text style={clientData}>
+            Imię i nazwisko:{` ${client.firstName} ${client.lastName}`}
+          </Text>
+
+          <Text style={clientData}>Miejscowość:{` ${client.city}`}</Text>
+          <Text style={clientData}>Ulica:{` ${client.street} ${client.homeNumber}`}</Text>
+          <Text style={clientData}>Telefon:{` ${client.phone}`}</Text>
         </View>
         <View style={sectionText}>
           <Text style={text}>

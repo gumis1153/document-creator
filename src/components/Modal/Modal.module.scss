@@ -72,6 +72,31 @@
   }
 }
 
+.wrapperGeneratedDocs {
+  position: absolute;
+  top: calc(50vh + 25px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: calc(100% - 100px);
+  background-color: #ffffff;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+
+  .header {
+    grid-row: 1 / 2;
+  }
+
+  .generatedDocsContent {
+    grid-row: 2 / 2;
+    width: 100%;
+    height: 100%;
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+  }
+}
+
 .summary {
   min-height: 320px;
   display: grid;
@@ -114,4 +139,35 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
+}
+
+.btnClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: block;
+  width: 26px;
+  height: 26px;
+  background-color: #00366f;
+  cursor: pointer;
+}
+
+.btnClose::after,
+.btnClose::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  height: 16px;
+  width: 1px;
+  background-color: #ffffff;
+}
+
+.btnClose::after {
+  transform: rotate(-45deg);
+}
+
+.btnClose::before {
+  transform: rotate(45deg);
 }

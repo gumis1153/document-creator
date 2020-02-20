@@ -11,7 +11,7 @@ const Home = () => {
           <h4>Uśmiechnij się :)</h4>
         </div>
         <div className={styles.photoContainer}>
-          {/* <img src="https://source.unsplash.com/1000x509/?landscapes" alt="" /> */}
+          Jeśli nie działa https://github.com/sass/node-sass/issues/1579#issuecomment-227661284
         </div>
       </div>
     </section>

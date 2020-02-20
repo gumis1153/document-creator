@@ -17,7 +17,6 @@ import Companies from './views/companies/companies';
 import Products from './views/products/products';
 import Documentation from './views/documentation/documentation';
 import Settings from './views/settings/settings';
-import AppDocs from './docs/Docs';
 import Footer from './components/Footer/Footer';
 
 class App extends React.Component {
@@ -339,6 +338,16 @@ class App extends React.Component {
     ],
   };
 
+  componentDidUpdate() {
+    console.log(this.state.clientId);
+  }
+
+  updateClientId = id => {
+    this.setState({
+      clientId: id,
+    });
+  };
+
   render() {
     return (
       <>
@@ -389,14 +398,18 @@ class App extends React.Component {
                 exact
                 path="/individual"
                 render={props => (
-                  <Individual {...props} individualClientDB={this.state.individualClientsDB} />
+                  <Individual
+                    {...props}
+                    individualClientDB={this.state.individualClientsDB}
+                    clientId={this.state.clientId}
+                    updateClientIdFn={this.updateClientId}
+                  />
                 )}
               />
               <Route exact path="/companies" component={Companies} />
               <Route exact path="/products" component={Products} />
               <Route exact path="/documentation" component={Documentation} />
               <Route exact path="/settings" component={Settings} />
-              <Route exact path="/personal-data-docs" component={AppDocs} />
             </Switch>
             <Footer />
           </div>
