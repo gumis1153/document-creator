@@ -3,6 +3,7 @@ import styles from './individual.module.scss';
 import Modal from '../../components/Modal/Modal';
 import ModalSummary from '../../components/Modal/ModalSummary';
 import ModalGeneratedDocs from '../../components/Modal/ModalGeneratedDocs';
+import { Switch } from 'react-router-dom';
 
 const sort = {
   default: (a, b) => a.id - b.id,
@@ -103,20 +104,17 @@ class Individual extends React.Component {
   //otwieranie info o kliencie
   handleShowClientInfo = e => {
     // debugger;
-    console.log(this.state.newClient);
+    // console.log(this.state.newClient);
     let index = e.target.getAttribute('data-id');
     this.props.updateClientIdFn(index);
-    console.log(index);
+    // console.log(index);
     const newClient = this.state.clientDB.find(obj => obj.id === index);
-    console.log(newClient);
+    // console.log(newClient);
     this.setState({
       newClient,
       modalSummaryClientOpen: true,
       modalClientInfoOpen: true,
     });
-    // clientId = this.state.newClient
-
-    // this.props.clientId = this.state.newClient.id;
   };
 
   isDocsGeneratedFn = () => {
@@ -167,26 +165,40 @@ class Individual extends React.Component {
     this.setState({
       searchElement: e.target.value,
     });
+    console.log(e.target.value);
   };
 
   transferDataToDocs = () => {
     this.setState({
       modalGeneratedDocs: true,
     });
-    // let dataToDocs = this.props.dataToDocs;
-    // dataToDocs = this.state.newClient;
-    // console.log
-    // console.log(dataToDocs);
-    // this.state.newClient;
   };
-  // handleSearch = e => {
-  // let searchElement = this.state.searchElement;
-  // const getClient = this.state.clientDB.findIndex(
-  // client => client.searchElement === `${e.target.value}`,
-  // );
-  // this.state.clientDB.find();
-  // console.log(getClient);
-  // };
+
+  handleSearch = e => {
+    let searchedArr = [];
+
+    this.props.individualClientDB.forEach(i => {
+      let contains = null;
+
+      if (this.state.searchElement === 'firstName') {
+        contains = i.firstName.toLowerCase().search(e.target.value.toLowerCase()) != -1;
+      } else if (this.state.searchElement === 'lastName') {
+        contains = i.lastName.toLowerCase().search(e.target.value.toLowerCase()) != -1;
+      } else if (this.state.searchElement === 'city') {
+        contains = i.city.toLowerCase().search(e.target.value.toLowerCase()) != -1;
+      } else if (this.state.searchElement === 'street') {
+        contains = i.street.toLowerCase().search(e.target.value.toLowerCase()) != -1;
+      }
+
+      if (contains) {
+        searchedArr.push(i);
+      }
+      this.setState({
+        clientDB: searchedArr,
+      });
+    });
+  };
+
   render() {
     const {
       modalAddNewClientOpen,
